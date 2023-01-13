@@ -49,7 +49,7 @@ class CategorySeeder extends Seeder
            $category = Category::factory()->create($category);
             }
             $brands = Brand::factory(4)->create();
-        foreach ($brands as $brand) {
+            foreach ($brands as $brand) {
             $brand->categories()->attach($category->id);
             }
     }
