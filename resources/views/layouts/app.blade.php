@@ -11,36 +11,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        @livewireStyles
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            const defaultTheme = require('tailwindcss/defaultTheme');
-            const colors = require('tailwindcss/colors');
-            module.exports = {
-                content: [
-                    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-                    './vendor/laravel/jetstream/**/*.blade.php',
-                    './storage/framework/views/*.php',
-                    './resources/views/**/*.blade.php',
-                ],
-            
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                        },
-                        colors: {
-                            trueGray: colors.neutral,
-                            orange: colors.orange,
-                            lime: colors.lime,
-                        }
-                    },
-                },
-            
-                plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
-            };</script>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
         <!-- Scripts -->
-        
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
