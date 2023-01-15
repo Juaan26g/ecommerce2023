@@ -1,11 +1,7 @@
-<style>
-    #navigation-menu {
-        height: calc(100vh - 4rem);
-    }
-</style>
-<header class="bg-neutral-700 sticky-top-0">
+
+<header class="bg-neutral-700 sticky-top-0" x-data="dropdown()">
     <div class="container-menu flex items-center h-16">
-        <a
+        <a x-on:click="show()"
             class="flex flex-col items-center justify-center px-4 bg-white bg-opacity-25 text-white cursor-pointer font-semibold h-full">
             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -77,9 +73,10 @@
         @livewire('dropdown-cart')
     </div>
 
-    <nav id="navigation-menu" class="bg-neutral-700 bg-opacity-25 w-full absolute">
+    <nav id="navigation-menu" x-show="open" :class="{ 'block': open, 'hidden': !open }"
+        class="bg-neutral-700 bg-opacity-25 w-full absolute hidden">
         <div class="container-menu h-full">
-            <div class="grid grid-cols-4 h-full relative">
+            <div x-on:click.away="close()" class="grid grid-cols-4 h-full relative">
                 <ul class="bg-white">
                     @foreach ($categories as $category)
                         <li class="text-trueGray-500 hover:bg-orange-500 hover:text-white">
@@ -110,7 +107,8 @@
                             </ul>
                         </div>
                         <div class="col-span-3">
-                            <img class="h-64 w-full object-cover object-center" src="{{ Storage::url($categories->first()->image) }}" alt="">
+                            <img class="h-64 w-full object-cover object-center"
+                                src="{{ Storage::url($categories->first()->image) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -118,3 +116,4 @@
         </div>
     </nav>
 </header>
+
