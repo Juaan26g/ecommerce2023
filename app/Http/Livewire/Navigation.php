@@ -12,5 +12,6 @@ class Navigation extends Component
         $categories = Category::all();
 
         return view('livewire.navigation', compact('categories'));
+        
     }
 }
