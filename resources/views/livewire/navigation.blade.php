@@ -55,7 +55,7 @@
             @else
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <i class="fas fa-user-circle text-white text-3xl cursor-pointer"></i>
+                        <i class="fas fa-circle-user text-white text-3xl cursor-pointer"></i>
                     </x-slot>
 
                     <x-slot name="content">
