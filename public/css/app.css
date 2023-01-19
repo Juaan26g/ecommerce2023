@@ -1035,6 +1035,9 @@ select {
 #navigation-menu{
         height: calc(100vh - 4rem);
         }
+.navigation-link:hover .navigation-submenu{
+        display: block !important;
+        }
 .fixed {
   position: fixed;
 }
@@ -1530,10 +1533,6 @@ select {
 .bg-neutral-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 .bg-orange-500 {
   --tw-bg-opacity: 1;
