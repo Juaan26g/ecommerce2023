@@ -14,12 +14,14 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/glider-js/glider.min.css') }}">
 
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
+<script src="{{ asset('vendor/glider-js/glider.min.js') }}"></script>
 
 <body class="font-sans antialiased">
     <x-jet-banner />
