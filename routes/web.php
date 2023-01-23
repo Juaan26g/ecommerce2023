@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{WelcomeController,CategoryController };
+use App\Http\Controllers\{WelcomeController,CategoryController,ProductsController };
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,9 @@ use App\Http\Controllers\{WelcomeController,CategoryController };
 Route::get('/', WelcomeController::class );
 
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('products/{product}', [ProductsController::class, 'show'])->name('products.show');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

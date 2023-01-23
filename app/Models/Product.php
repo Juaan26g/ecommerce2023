@@ -14,14 +14,17 @@ class Product extends Model
 
     protected $fillable = ['name', 'slug', 'description', 'price', 'subcategory_id', 'brand_id', 'quantity'];
     //protected $guarded = ['id', 'created_at', 'updated_at'];
-    public function sizes(){
-    return $this->hasMany(Size::class);
+    public function sizes()
+    {
+        return $this->hasMany(Size::class);
     }
-    public function brand(){
-    return $this->belongsTo(Brand::class);
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
-    public function subcategory(){
-    return $this->belongsTo(Subcategory::class);
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
     }
     public function colors()
     {
@@ -30,6 +33,11 @@ class Product extends Model
 
     public function images()
     {
-    return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
