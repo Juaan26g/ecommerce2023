@@ -4,7 +4,7 @@
 
 @layer components {
     .container-menu {
-        @apply max-w-7xl mx-auto px-4 sm: px-6 lg:px-8;
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }
 
     #navigation-menu {
@@ -17,5 +17,5 @@
 }
 
 .form-control {
-    @apply border-gray-300 focus: border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm;
+    @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm;
 }
