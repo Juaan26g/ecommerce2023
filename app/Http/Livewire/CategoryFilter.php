@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CategoryFilter extends Component
 {
-    public $category, $subcategoria, $marca;
+    public $category, $subcategoria, $marca, $view = 'grid';
 
     use WithPagination;
 
