@@ -17,9 +17,8 @@
             <ul class="divide-y divide-gray-200">
                 @foreach ($category->subcategories as $subcategory)
                     <li class="py-2 text-sm ">
-                        <a class="cursor-pointer hover:text-orange-500 capitalize {{ $subcategoria == $subcategory->name ? 'text-orange-500 fontsemibold' : '' }}"
-                            wire:click="$set('subcategoria', '{{ $subcategory->name }}')"
-                            href="">{{ $subcategory->name }}</a>
+                        <a class="cursor-pointer hover:text-orange-500 capitalize {{ $subcategoria == $subcategory->slug ? 'text-orange-500 fontsemibold' : '' }}"
+                            wire:click="$set('subcategoria', '{{ $subcategory->slug }}')">{{ $subcategory->name }}</a>
                     </li>
                 @endforeach
             </ul>
@@ -28,14 +27,15 @@
             <ul class="divide-y divide-gray-200">
                 @foreach ($category->brands as $brand)
                     <li class="py-2 text-sm ">
-                        <a class="cursor-pointer hover:text-orange-500 capitalize  {{ $marca == $brand->name ? 'text-orange-500 font-semibold' : '' }}"
-                            wire:click="$set('marca', '{{ $brand->name }}')" href="">{{ $brand->name }}</a>
+                        <a class="cursor-pointer hover:text-orange-500 capitalize {{ $marca == $brand->name ? 'text-orange-500 font-semibold' : '' }}"
+                            wire:click="$set('marca', '{{ $brand->name }}')">{{ $brand->name }}</a>
                     </li>
                 @endforeach
             </ul>
+
             <x-jet-button class="mt-4" wire:click="limpiar">
                 Eliminar Filtros
-            </x-jet-button> 
+            </x-jet-button>
         </aside>
         <div class=" md:col-span-2 lg:col-span-4">
             @if ($view == 'grid')
