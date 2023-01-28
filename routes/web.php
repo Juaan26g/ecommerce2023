@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WelcomeController,CategoryController,ProductsController };
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +16,10 @@ use App\Http\Controllers\{WelcomeController,CategoryController,ProductsControlle
 */
 
 Route::get('/', WelcomeController::class );
+
+Route::get('/deletecart', function () {
+    Cart::destroy();
+   });
 
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
