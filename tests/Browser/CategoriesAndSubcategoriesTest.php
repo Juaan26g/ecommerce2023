@@ -35,9 +35,19 @@ class CategoriesAndSubcategoriesTest extends DuskTestCase
             'name' => 'Consola y videojuegos',
         ]);
 
+        $category2 = Category::factory()->create([
+            'name' => 'TV, audio y video',
+        ]);
+
         Subcategory::factory()->create([
             'name' => 'Videojuegos para PC',
             'category_id' => $category->id
+        ]);
+
+        Subcategory::factory()->create([
+            'name' => 'TV y audio',
+            'category_id' => $category2->id
+
         ]);
 
 
@@ -45,8 +55,12 @@ class CategoriesAndSubcategoriesTest extends DuskTestCase
             $browser->visit('/')
             ->pause(500)
             ->clickLink('Categorías')
+            ->pause(500)
             ->assertSee('Consola y videojuegos')
-            ->assertSee('Videojuegos para PC');
+            ->mouseover('@categoryNav')
+            ->pause(500)
+            ->assertSee('Videojuegos para PC')
+            ->assertDontSee('TV y audio');
         });
     }
 }
