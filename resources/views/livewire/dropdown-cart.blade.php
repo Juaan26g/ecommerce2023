@@ -3,8 +3,13 @@
         <x-slot name="trigger">
             <span class="relative inline-block cursor-pointer">
                 <x-cart size="30" color="white"></x-cart>
-                <span
-                    class="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2 "></span>
+                @if (Cart::count())
+                    <span
+                        class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none textred-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{ Cart::count() }}</span>
+                @else
+                    <span
+                        class="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2 "></span>
+                @endif
             </span>
         </x-slot>
         <x-slot name="content">
@@ -28,12 +33,13 @@
             </ul>
             @if (Cart::count())
                 <div class="px-3 py-2">
-                    <p class="text-lg text-gray-700 mt-2 mb-3"><span class="font-bold">Total:</span> {{ Cart::subtotal() }} &euro;
+                    <p class="text-lg text-gray-700 mt-2 mb-3"><span class="font-bold">Total:</span>
+                        {{ Cart::subtotal() }} &euro;
                     </p>
 
                     <x-button-link class="w-full" color="orange">
                         Ir al carrito de compras
-                        </x-button-link>
+                    </x-button-link>
                 </div>
             @endif
         </x-slot>
