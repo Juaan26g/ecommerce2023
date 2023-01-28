@@ -19,6 +19,16 @@
                         <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}" alt="">
                         <article class="flex-1">
                             <h1 class="font-bold">{{ $item->name }}</h1>
+                            <div class="flex">
+                                <p class="">Cant: {{ $item->qty }}</p>
+                                @isset($item->options['color'])
+                                    <p class="mx-2">- Color: {{ __(ucfirst($item->options['color'])) }}</p>
+                                @endisset
+
+                                @isset($item->options['size'])
+                                    <p class="mx-2">{{ $item->options['size'] }}</p>
+                                @endisset
+                            </div>
                             <p class="">Cant: {{ $item->qty }}</p>
                             <p>{{ $item->price }} &euro;</p>
                         </article>
