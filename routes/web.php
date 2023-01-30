@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WelcomeController, CategoryController, ProductsController, SearchController};
 use App\Http\Livewire\ShoppingCart;
-use Gloudemans\Shoppingcart\Facades\Cart;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +18,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::get('/', WelcomeController::class);
 
-Route::get('/deletecart', function () {
-    Cart::destroy();
-});
+Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
 
 Route::get('search', SearchController::class)->name('search');
 
