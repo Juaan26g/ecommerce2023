@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WelcomeController, CategoryController, ProductsController, SearchController};
-use App\Http\Livewire\ShoppingCart;
+use App\Http\Livewire\{ShoppingCart, CreateOrder };
 
 
 /*
