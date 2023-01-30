@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WelcomeController, CategoryController, ProductsController, SearchController};
+use App\Http\Livewire\ShoppingCart;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 /*
@@ -22,6 +23,9 @@ Route::get('/deletecart', function () {
 });
 
 Route::get('search', SearchController::class)->name('search');
+
+Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
+
 
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
