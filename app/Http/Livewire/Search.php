@@ -18,4 +18,10 @@ class Search extends Component
 
         return view('livewire.search', compact('products'));
     }
+
+    public $open = false;
+    public function updatedSearch($value)
+    {
+        $value ? $this->open = true : $this->open = false;
+    }
 }

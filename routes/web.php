@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{WelcomeController,CategoryController,ProductsController };
+use App\Http\Controllers\{WelcomeController, CategoryController, ProductsController, SearchController};
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 /*
@@ -15,11 +15,13 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 |
 */
 
-Route::get('/', WelcomeController::class );
+Route::get('/', WelcomeController::class);
 
 Route::get('/deletecart', function () {
     Cart::destroy();
-   });
+});
+
+Route::get('search', SearchController::class)->name('search');
 
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
