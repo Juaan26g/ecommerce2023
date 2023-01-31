@@ -29,7 +29,6 @@
                                     <p class="mx-2">{{ $item->options['size'] }}</p>
                                 @endisset
                             </div>
-                            <p class="">Cant: {{ $item->qty }}</p>
                             <p>{{ $item->price }} &euro;</p>
                         </article>
                     </li>

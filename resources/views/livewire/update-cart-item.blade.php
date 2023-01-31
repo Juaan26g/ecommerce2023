@@ -1,5 +1,5 @@
 <div class="flex items-center" x-data>
-    <x-jet-secondary-buttondisabled x-bind:disabled="$wire.qty <= 1" wire:loading.attr="disabled" wire:target="decrement"
+    <x-jet-secondary-button disabled x-bind:disabled="$wire.qty <= 1" wire:loading.attr="disabled" wire:target="decrement"
         wire:click="decrement">
         -
         </x-jet-secondary-button>
