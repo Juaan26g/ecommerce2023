@@ -13,33 +13,53 @@
             </span>
         </x-slot>
         <x-slot name="content">
-            <ul>
-                @forelse(Cart::content() as $item)
-                    <li class="flex p-2 border-b border-gray-200">
-                        <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}" alt="">
-                        <article class="flex-1">
-                            <h1 class="font-bold">{{ $item->name }}</h1>
-                            <div class="flex">
-                                <p class="">Cant: {{ $item->qty }}</p>
-                                @isset($item->options['color'])
-                                    <p class="mx-2">- Color: {{ __(ucfirst($item->options['color'])) }}</p>
-                                @endisset
-
-                                @isset($item->options['size'])
-                                    <p class="mx-2">{{ $item->options['size'] }}</p>
-                                @endisset
-                            </div>
-                            <p>{{ $item->price }} &euro;</p>
-                        </article>
-                    </li>
-                @empty
-                    <li class="py-6 px-4">
-                        <p class="text-center text-gray-700">
-                            No tiene agregado ningún item en el carrito
+            <div class="col-span-2">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <ul>
+                        @forelse(Cart::content() as $item)
+                            <li class="flex p-2 border-b border-gray-200">
+                                <img class="h-15 w-20 object-cover mr-4" src="{{ $item->options->image }}"
+                                    alt="">
+                                <article class="flex-1">
+                                    <h1 class="font-bold">{{ $item->name }}</h1>
+                                    <div class="flex">
+                                        <p class="">Cant: {{ $item->qty }}</p>
+                                        @isset($item->options['color'])
+                                            <p class="mx-2">- Color: {{ __(ucfirst($item->options['color'])) }}</p>
+                                        @endisset
+                                        @isset($item->options['size'])
+                                            <p class="mx-2">{{ $item->options['size'] }}</p>
+                                        @endisset
+                                    </div>
+                                    <p>{{ $item->price }} &euro;</p>
+                                </article>
+                            </li>
+                        @empty
+                            <li class="py-6 px-4">
+                                <p class="text-center text-gray-700">
+                                    No tiene agregado ningún item en el carrito
+                                </p>
+                            </li>
+                        @endforelse
+                    </ul>
+                    <hr class="mt-4 mb-3">
+                    <div class="text-gray-700">
+                        <p class="flex justify-between items-center">
+                            Subtotal
+                            <span>{{ Cart::subtotal() }} &euro;</span>
                         </p>
-                    </li>
-                @endforelse
-            </ul>
+                        <p class="flex justify-between items-center">
+                            Envío
+                            <span class="font-semibold">Gratis</span>
+                        </p>
+                        <hr class="mt-4 mb-3">
+                        <p class="flex justify-between items-center font-semibold">
+                            <span class="text-lg">Total</span>
+                            {{ Cart::subtotal() }} &euro;
+                        </p>
+                    </div>
+                </div>
+            </div>
             @if (Cart::count())
                 <div class="px-3 py-2">
                     <p class="text-lg text-gray-700 mt-2 mb-3"><span class="font-bold">Total:</span>
