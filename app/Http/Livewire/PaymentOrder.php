@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Order;
 use Livewire\Component;
 
 class PaymentOrder extends Component
 {
+    use AuthorizesRequests;
     public $order;
     protected $listeners = ['payOrder'];
     public function mount(Order $order)
