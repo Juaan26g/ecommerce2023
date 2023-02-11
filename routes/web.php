@@ -19,7 +19,8 @@ use App\Http\Livewire\{ShoppingCart, CreateOrder };
 Route::get('/', WelcomeController::class);
 
 Route::get('orders/create', CreateOrder::class)->middleware('auth')->name('orders.create');
-Route::get('orders/{order}/payment', [OrderController::class, 'payment'])->name('orders.payment');
+Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::get('search', SearchController::class)->name('search');
 
 Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');
