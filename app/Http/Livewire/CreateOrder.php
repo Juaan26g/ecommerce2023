@@ -55,8 +55,8 @@ class CreateOrder extends Component
         $order->save();
 
         Cart::destroy();
-
-        return $this->redirect()->route('orders.payment', $order);
+        $paymentR = route('orders.payment', $order);
+        return $this->redirect($paymentR);
     }
     public function mount()
     {
