@@ -58,6 +58,7 @@ function discount($item){
     }
 }
 
+//Añadido para que las ordenes expiren a los 10 minutos
 function increase($item)
 {
     $product = Product::find($item->id);

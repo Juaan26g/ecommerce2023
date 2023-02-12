@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{WelcomeController, CategoryController, ProductsController, SearchController, OrderController};
-use App\Http\Livewire\{ShoppingCart, CreateOrder,PaymentOrder };
+use App\Http\Livewire\{ShoppingCart, CreateOrder, PaymentOrder};
 
 
 /*
@@ -26,12 +26,25 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth'])->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/create', CreateOrder::class)->name('orders.create');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
-    });
+});
+
+Route::get('prueba', function () {
+    $orders = \App\Models\Order::where('status', 1)->where('created_at', '<', now()->subMinutes(10))->get();
+    foreach ($orders as $order) {
+        $items = json_decode($order->content);
+        foreach ($items as $item) {
+            increase($item);
+        }
+        $order->status = 5;
+        $order->save();
+    }
+    return "Completado con éxito";
+});
 
 Route::middleware([
     'auth:sanctum',
