@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\{ShowProducts,};
+use App\Http\Livewire\Admin\{ShowProducts,EditProduct,CreateProduct};
 
 Route::get('/', ShowProducts::class)->name('admin.index');
 Route::get('products/{product}/edit', EditProduct::class)->name('admin.products.edit');
