@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class CreateProduct extends Component
 {
-    public $name, $slug, $description;
+    public $name, $slug, $description, $price , $quantity;
     public $categories, $subcategories = [], $brands = [];
     public $category_id = '', $subcategory_id = '', $brand_id = '';
     public function mount()
@@ -26,6 +26,10 @@ class CreateProduct extends Component
             $query->where('category_id', $value);
         })->get();
         $this->reset(['subcategory_id', 'brand_id']);
+    }
+    public function getSubcategoryProperty()
+    {
+        return Subcategory::find($this->subcategory_id);
     }
     public function render()
     {
