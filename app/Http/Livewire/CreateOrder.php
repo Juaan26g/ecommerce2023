@@ -54,6 +54,10 @@ class CreateOrder extends Component
 
         $order->save();
 
+        foreach (Cart::content() as $item) {
+            discount($item);
+            }
+
         Cart::destroy();
         $paymentR = route('orders.payment', $order);
         return $this->redirect($paymentR);
