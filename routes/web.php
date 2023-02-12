@@ -27,9 +27,10 @@ Route::get('products/{product}', [ProductsController::class, 'show'])->name('pro
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::middleware(['auth'])->group(function (){
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/create', CreateOrder::class)->name('orders.create');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::get('orders/{order}/payment', PaymentOrder::class)->name('payment-order');
+    Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
     });
 
 Route::middleware([
