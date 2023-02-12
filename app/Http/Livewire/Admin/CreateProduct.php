@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\{Category, Subcategory};
-use App\Models\Brand;
+use App\Models\{Category, Subcategory,Brand,Product};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -31,6 +30,17 @@ class CreateProduct extends Component
         }
 
         $this->validate();
+        $product = new Product();
+        $product->name = $this->name;
+        $product->slug = $this->slug;
+        $product->description = $this->description;
+        $product->price = $this->price;
+        $product->subcategory_id = $this->subcategory_id;
+        $product->brand_id = $this->brand_id;
+        if ($this->subcategory_id && !$this->subcategory->color && !$this->subcategory->size) {
+            $product->quantity = $this->quantity;
+        }
+        $product->save();
     }
     public function mount()
     {
