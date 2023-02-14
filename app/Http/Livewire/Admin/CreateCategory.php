@@ -68,6 +68,8 @@ class CreateCategory extends Component
 
         $this->image = 2;
         $this->reset('createForm');
+        $this->getCategories();
+        $this->emit('saved');
     }
     public function render()
     {
