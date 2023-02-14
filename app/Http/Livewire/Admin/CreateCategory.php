@@ -26,6 +26,14 @@ class CreateCategory extends Component
         'createForm.image' => 'required|image|max:1024',
         'createForm.brands' => 'required',
     ];
+    public $editForm = [
+        'open' => false,
+        'name' => null,
+        'slug' => null,
+        'icon' => null,
+        'image' => null,
+        'brands' => [],
+    ];
 
     public $createForm = [
         'name' => null,
@@ -35,6 +43,8 @@ class CreateCategory extends Component
         'brands' => [],
     ];
     public $brands, $categories, $image;
+    public $editImage;
+    public $category;
     public $listeners = ['delete'];
     public function mount()
     {
@@ -71,6 +81,18 @@ class CreateCategory extends Component
         $this->reset('createForm');
         $this->getCategories();
         $this->emit('saved');
+    }
+
+    public function edit(Category $category)
+    {
+        $this->category = $category;
+
+        $this->editForm['open'] = true;
+        $this->editForm['name'] = $category->name;
+        $this->editForm['slug'] = $category->slug;
+        $this->editForm['icon'] = $category->icon;
+        $this->editForm['image'] = $category->image;
+        $this->editForm['brands'] = $category->brands->pluck('id');
     }
     public function delete(Category $category)
     {
