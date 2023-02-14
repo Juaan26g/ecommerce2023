@@ -13,6 +13,7 @@ class EditProduct extends Component
 {
     public $product, $categories, $subcategories, $brands;
     public $category_id;
+    protected $listeners = ['refreshProduct'];
 
     protected $rules = [
         'category_id' => 'required',
@@ -34,6 +35,11 @@ class EditProduct extends Component
         $this->brands = Brand::whereHas('categories', function (Builder $query) {
             $query->where('category_id', $this->category_id);
         })->get();
+    }
+
+    public function refreshProduct()
+    {
+        $this->product = $this->product->fresh();
     }
 
     public function updatedProductName($value)
