@@ -1,5 +1,9 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
     <h1 class="text-3xl text-center font-semibold mb-8">Complete los datos para crear un producto</h1>
+    <div class="mb-4" wire:ignore>
+        <form action="{{ route('admin.products.files', $product) }}" method="POST" class="dropzone"
+            id="my-awesome-dropzone"></form>
+    </div>
     <div class="bg-white shadow-xl rounded-lg p-6">
         <div>
             <x-jet-label value="Categorías" />
@@ -92,3 +96,16 @@
         @endif
     </div>
 </div>
+@push('scripts')
+    <script>
+        Dropzone.options.myAwesomeDropzone = {
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            dictDefaultMessage: "Mueva una imagen al recuadro",
+            acceptedFiles: 'image/*',
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: 2 // MB
+        };
+    </script>
+@endpush
