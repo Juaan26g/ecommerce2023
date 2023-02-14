@@ -1,13 +1,13 @@
 <div>
     <x-slot name="header">
         <div class="flex items-center">
-        <h2 class="font-semibold text-xl text-gray-600 leading-tight">
-            Lista de productos
-        </h2>
-        <x-button-link class="ml-auto" href="{{route('admin.products.create')}}">
-            Agregar producto
+            <h2 class="font-semibold text-xl text-gray-600 leading-tight">
+                Lista de productos
+            </h2>
+            <x-button-link class="ml-auto" href="{{ route('admin.products.create') }}">
+                Agregar producto
             </x-button-link>
-            </div>
+        </div>
     </x-slot>
 
     <div class="container-menu py-12">
@@ -54,7 +54,7 @@
                                                         <div class="flex items-center">
                                                             <div class="flex-shrink-0 h-10 w-10 object-cover">
                                                                 <img class="h-10 w-10 rounded-full"
-                                                                    src="{{ Storage::url($product->images->first()->url) }}"
+                                                                    src="{{ $product->images->count() ? Storage::url($product->images->first()->url) : 'img/default.jpg' }}"
                                                                     alt="">
                                                             </div>
                                                             <div class="ml-4">
