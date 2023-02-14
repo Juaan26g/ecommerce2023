@@ -35,6 +35,7 @@ class CreateCategory extends Component
         'brands' => [],
     ];
     public $brands, $categories, $image;
+    public $listeners = ['delete'];
     public function mount()
     {
         $this->getBrands();
@@ -70,6 +71,12 @@ class CreateCategory extends Component
         $this->reset('createForm');
         $this->getCategories();
         $this->emit('saved');
+    }
+    public function delete(Category $category)
+    {
+        $category->brands()->detach();
+        $category->delete();
+        $this->getCategories();
     }
     public function render()
     {
