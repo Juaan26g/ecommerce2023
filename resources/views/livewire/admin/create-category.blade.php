@@ -169,5 +169,13 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>
+    <div>
+        <x-jet-label>
+            Imagen
+        </x-jet-label>
+        <input wire:model="editImage" accept="image/*" type="file" class="mt-1" name=""
+            id="{{ $image2 }}">
+        <x-jet-input-error for="editImage" />
+    </div>
 
 </div>
