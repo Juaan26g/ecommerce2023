@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Size;
+use App\Models\{Size};
 use Livewire\Component;
+use App\Models\ColorSize as TbPivot;
 
 class SizeProduct extends Component
 {
@@ -63,7 +64,7 @@ class SizeProduct extends Component
     public function render()
     {
         $sizes = $this->product->sizes;
-        $sizeColors = $this->size->colors;
+       
 
         return view('livewire.admin.size-product', compact('sizes'));
         
