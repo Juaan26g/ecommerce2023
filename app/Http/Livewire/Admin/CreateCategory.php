@@ -18,6 +18,11 @@ class CreateCategory extends Component
         'createForm.icon' => 'icono',
         'createForm.image' => 'imagen',
         'createForm.brands' => 'marcas',
+        'editForm.name' => 'nombre',
+        'editForm.slug' => 'slug',
+        'editForm.icon' => 'ícono',
+        'editImage' => 'imagen',
+        'editForm.brands' => 'marcas'
     ];
     protected $rules = [
         'createForm.name' => 'required',
@@ -55,6 +60,23 @@ class CreateCategory extends Component
     public function getCategories()
     {
         $this->categories = Category::all();
+    }
+    public function update()
+    {
+        $rules = [
+            'editForm.name' => 'required',
+            'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
+            'editForm.icon' => 'required',
+            'editForm.brands' => 'required',
+        ];
+        if ($this->editImage) {
+            $rules['editImage'] = 'required|image|max:1024';
+        }
+        $this->validate($rules);
+    }
+    public function updatedEditFormName($value)
+    {
+        $this->editForm['slug'] = Str::slug($value);
     }
     public function updatedCreateFormName($value)
     {
