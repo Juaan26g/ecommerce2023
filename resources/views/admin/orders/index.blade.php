@@ -1,7 +1,7 @@
-<x-app-layout>
+<x-admin-layout>
     <div class="container-menu py-12">
         <section class="grid grid-cols-5 gap-6 text-white">
-            <a href="{{ route('orders.index') . '?status=1' }}"
+            <a href="{{ route('admin.orders.index') . '?status=1' }}"
                 class="bg-red-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[1] }}
@@ -11,7 +11,7 @@
                     <i class="fas fa-business-time"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=2' }}"
+            <a href="{{ route('admin.orders.index') . '?status=2' }}"
                 class="bg-gray-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[2] }}
@@ -31,7 +31,7 @@
                     <i class="fas fa-truck"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=4' }}"
+            <a href="{{ route('admin.orders.index') . '?status=4' }}"
                 class="bg-pink-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[4] }}
@@ -41,7 +41,7 @@
                     <i class="fas fa-check-circle"></i>
                 </p>
             </a>
-            <a href="{{ route('orders.index') . '?status=5' }}"
+            <a href="{{ route('admin.orders.index') . '?status=5' }}"
                 class="bg-green-500 bg-opacity-75 rounded-lg px-12 pt-8 pb-4">
                 <p class="text-center text-2xl">
                     {{ $ordersByStatus[5] }}
@@ -51,7 +51,6 @@
                     <i class="fas fa-times-circle"></i>
                 </p>
             </a>
-
         </section>
         @if ($orders->count())
             <section class="bg-white shadow-lg rounded-lg px-12 py-8 mt-12 text-gray-700">
@@ -59,7 +58,7 @@
                 <ul>
                     @foreach ($orders as $order)
                         <li>
-                            <a href="{{ route('orders.show', $order) }}"
+                            <a href="{{ route('admin.orders.show', $order) }}"
                                 class="flex items-center py-2 px-4 hover:bg-gray-100">
                                 <span class="w-12 text-center">
                                     @switch($order->status)
@@ -137,6 +136,5 @@
                 </span>
             </div>
         @endif
-
     </div>
-</x-app-layout>
+</x-admin-layout>
