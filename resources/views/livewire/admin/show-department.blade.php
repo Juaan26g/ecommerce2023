@@ -64,7 +64,7 @@
                                     <div class="flex divide-x divide-gray-300 font-semibold">
                                         <a class="pr-2 hover:text-blue-600 cursor-pointer"
                                             wire:click="edit({{ $city }})">Editar</a>
-                                        <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="">Eliminar</a>
+                                        <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="$emit('deleteCity', {{ $city->id }})">Eliminar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -115,7 +115,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.emitTo('admin.show-department', 'delete', cityId)
+                        Livewire.emitTo('admin.show-city', 'delete', cityId)
                         Swal.fire(
                             'Deleted!',
                             'Your file has been deleted.',
