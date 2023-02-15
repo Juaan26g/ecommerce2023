@@ -56,7 +56,7 @@
                         @foreach ($cities as $city)
                             <tr>
                                 <td class="py-2">
-                                    <a href="" class="uppercase underline hover:text-blue-600">
+                                    <a href="{{ route('admin.cities.show', $city) }}" class="uppercase underline hover:text-blue-600">
                                         {{ $city->name }}
                                     </a>
                                 </td>

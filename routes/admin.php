@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\{ShowProducts, EditProduct, CreateProduct, ShowCategory, BrandComponent, DepartmentComponent, ShowDepartment};
+use App\Http\Livewire\Admin\{ShowProducts, EditProduct, CreateProduct, ShowCategory, BrandComponent, DepartmentComponent, ShowDepartment, ShowCity};
 use App\Http\Controllers\Admin\{ProductController, CategoryController,OrderController};
 
 Route::get('/', ShowProducts::class)->name('admin.index');
@@ -15,3 +15,4 @@ Route::get('orders', [OrderController::class, 'index'])->name('admin.orders.inde
 Route::get('orders/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
 Route::get('departments', DepartmentComponent::class)->name('admin.departments.index');
 Route::get('departments/{department}', ShowDepartment::class)->name('admin.departments.show');
+Route::get('cities/{city}', ShowCity::class)->name('admin.cities.show');
