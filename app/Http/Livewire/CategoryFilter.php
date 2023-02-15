@@ -10,32 +10,40 @@ use Illuminate\Database\Eloquent\Builder;
 class CategoryFilter extends Component
 {
     public $category, $subcategoria, $marca, $view = 'grid';
+    public $queryString = ['subcategoria', 'marca'];
 
     use WithPagination;
 
     public function limpiar()
-
     {
-        $this->reset(['subcategoria', 'marca']);
-    }   
+        $this->reset(['subcategoria', 'marca', 'page']);
+    }
+    public function updatedSubcategoria()
+    {
+        $this->resetPage();
+    }
+    public function updatedMarca()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $productsQuery = Product::query()->whereHas('subcategory.category', function(Builder $query){
+        $productsQuery = Product::query()->whereHas('subcategory.category', function (Builder $query) {
             $query->where('id', $this->category->id);
         });
         if ($this->subcategoria) {
-            $productsQuery = $productsQuery->whereHas('subcategory', function(Builder $query){
+            $productsQuery = $productsQuery->whereHas('subcategory', function (Builder $query) {
                 $query->where('slug', $this->subcategoria);
             });
         }
         if ($this->marca) {
-            $productsQuery = $productsQuery->whereHas('brand', function(Builder $query){
+            $productsQuery = $productsQuery->whereHas('brand', function (Builder $query) {
                 $query->where('name', $this->marca);
             });
         }
-    
-    $products = $productsQuery->paginate(20);
+
+        $products = $productsQuery->paginate(20);
         return view('livewire.category-filter', compact('products'));
     }
 }

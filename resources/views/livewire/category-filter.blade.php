@@ -40,7 +40,7 @@
         <div class=" md:col-span-2 lg:col-span-4">
             @if ($view == 'grid')
                 <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach ($products as $product)
+                    @forelse ($products as $product)
                         <li class="bg-white rounded-lg shadow">
                             <article>
                                 <figure>
@@ -57,14 +57,29 @@
                                 </div>
                             </article>
                         </li>
-                    @endforeach
-                </ul>
-            @else
-                <ul>
-                    @foreach ($products as $product)
-                        <x-products-list :product="$product"></x-products-list>
-                    @endforeach
-                </ul>
+                    @endforelse
+                @empty
+                    <li class="md:col-span-2 lg:col-span-4">
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                            role="alert">
+                            <strong class="font-bold">Upss!</strong>
+                            <span class="block sm:inline">No existen productos con ese filtro.</span>
+                        </div>
+                    </li>
+            @endforelse
+            </ul>
+        @else
+            <ul>
+                @forelse($products as $product)
+                    <x-products-list :product="$product"></x-products-list>
+                @empty
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Upss!</strong>
+                        <span class="block sm:inline">No existen productos con ese filtro.</span>
+                    </div>
+                @endforelse
+            </ul>
             @endif
             <div class="mt-4">
                 {{ $products->links() }}
