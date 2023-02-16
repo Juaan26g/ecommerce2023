@@ -42,6 +42,12 @@ class BrandComponent extends Component
         $this->reset('createForm');
         $this->getBrands();
     }
+    public function edit(Brand $brand)
+    {
+        $this->brand = $brand;
+        $this->editForm['open'] = true;
+        $this->editForm['name'] = $brand->name;
+    }
     public function update()
     {
         $this->validate([

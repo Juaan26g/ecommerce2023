@@ -26,3 +26,4 @@
             });
         </script>
     @endpush
+</x-admin-layout>

@@ -4,8 +4,7 @@
             <h1 class="font-semibold text-gray-700 uppercase">{{ $category->name }}</h1>
             <div class="hidden md:block grid grid-cols-2 border border-gray-200 divide-x divide-gray-200 text-gray-500">
                 <i class="fas fa-border-all p-3 cursor-pointer {{ $view == 'grid' ? 'text-orange-500' : '' }}"
-                    wire:click="$set('view',
-                'grid')"></i>
+                    wire:click="$set('view','grid')"></i>
                 <i class="fas fa-th-list p-3 cursor-pointer  {{ $view == 'list' ? 'text-orange-500' : '' }}"
                     wire:click="$set('view', 'list')"></i>
             </div>
@@ -57,8 +56,7 @@
                                 </div>
                             </article>
                         </li>
-                    @endforelse
-                @empty
+                    @empty
                     <li class="md:col-span-2 lg:col-span-4">
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                             role="alert">
@@ -66,10 +64,10 @@
                             <span class="block sm:inline">No existen productos con ese filtro.</span>
                         </div>
                     </li>
-            @endforelse
-            </ul>
-        @else
-            <ul>
+                    @endforelse
+                </ul>
+            @else
+                <ul>
                 @forelse($products as $product)
                     <x-products-list :product="$product"></x-products-list>
                 @empty
@@ -79,7 +77,7 @@
                         <span class="block sm:inline">No existen productos con ese filtro.</span>
                     </div>
                 @endforelse
-            </ul>
+                </ul>
             @endif
             <div class="mt-4">
                 {{ $products->links() }}
