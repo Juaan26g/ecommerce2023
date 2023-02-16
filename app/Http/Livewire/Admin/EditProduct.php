@@ -2,17 +2,15 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\{Product, Category,Brand, Subcategory};
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\{Str,Facades\Storage};
+use App\Models\Image;
 use Livewire\Component;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\{Brand, Product, Category, Subcategory};
 
 class EditProduct extends Component
 {
-    public $product, $categories, $subcategories, $brands;
-    public $category_id;
-    protected $listeners = ['refreshProduct', 'delete'];
-
     protected $rules = [
         'category_id' => 'required',
         'product.subcategory_id' => 'required',
@@ -23,17 +21,65 @@ class EditProduct extends Component
         'product.price' => 'required',
         'product.quantity' => 'numeric',
     ];
+
+    protected $listeners = ['refreshProduct', 'delete'];
+
+    public $product, $categories, $subcategories, $brands;
+    public $category_id;
+
     public function mount(Product $product)
     {
         $this->product = $product;
 
         $this->categories = Category::all();
         $this->category_id = $product->subcategory->category->id;
+
         $this->subcategories = Subcategory::where('category_id', $this->category_id)->get();
         $this->brands = Brand::whereHas('categories', function (Builder $query) {
             $query->where('category_id', $this->category_id);
         })->get();
     }
+
+    public function updatedCategoryId($value)
+    {
+        $this->subcategories = Subcategory::where('category_id', $value)->get();
+        $this->brands = Brand::whereHas('categories', function (Builder $query) use ($value) {
+            $query->where('category_id', $value);
+        })->get();
+        $this->product->subcategory_id = '';
+        $this->product->brand_id = '';
+    }
+
+    public function updatedProductName($value)
+    {
+        $this->product->slug = Str::slug($value);
+    }
+
+    public function getSubcategoryProperty()
+    {
+        return Subcategory::find($this->product->subcategory_id);
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.edit-product')->layout('layouts.admin');
+    }
+
+    public function save()
+    {
+        $this->rules['product.slug'] = 'required|unique:products,slug,' . $this->product->id;
+        if ($this->product->subcategory_id) {
+            if (!$this->subcategory->color && !$this->subcategory->size) {
+                $this->rules['product.quantity'] = 'required|numeric';
+            }
+        }
+        $this->validate();
+
+        $this->product->save();
+
+        $this->emit('saved');
+    }
+
     public function delete()
     {
         $images = $this->product->images;
@@ -45,41 +91,15 @@ class EditProduct extends Component
         return redirect()->route('admin.index');
     }
 
-    public function refreshProduct()
+    public function deleteImage(Image $image)
     {
+        Storage::disk('public')->delete([$image->url]);
+        $image->delete();
         $this->product = $this->product->fresh();
     }
 
-    public function updatedProductName($value)
+    public function refreshProduct()
     {
-        $this->product->slug = Str::slug($value);
-    }
-    public function updatedCategoryId($value)
-    {
-        $this->subcategories = Subcategory::where('category_id', $value)->get();
-        $this->brands = Brand::whereHas('categories', function (Builder $query) use ($value) {
-            $query->where('category_id', $value);
-        })->get();
-        $this->product->subcategory_id = '';
-        $this->product->brand_id = '';
-    }
-    public function getSubcategoryProperty()
-    {
-        return Subcategory::find($this->product->subcategory_id);
-    }
-    public function save()
-    {
-        $this->rules['product.slug'] = 'required|unique:products,slug,' . $this->product->id;
-        if ($this->product->subcategory_id) {
-            if (!$this->subcategory->color && !$this->subcategory->size) {
-                $this->rules['product.quantity'] = 'required|numeric';
-            }
-        }
-        $this->validate();
-        $this->product->save();
-    }
-    public function render()
-    {
-        return view('livewire.admin.edit-product')->layout('layouts.admin');
+        $this->product = $this->product->fresh();
     }
 }
