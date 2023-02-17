@@ -1,4 +1,4 @@
-<header class="bg-neutral-700 sticky z-50 top-0" x-data="dropdown()">
+<header class="bg-neutral-700 sticky top-0" style="z-index: 900" x-data="dropdown()">
     <div class="container-menu flex items-center h-16 justify-between md:justify-start">
         <a :class="{ 'bg-opacity-100 text-orange-500': open }" x-on:click="show()"
             class="flex flex-col items-center justify-center order-last md:order-first px-6 sm:px-4 bg-white bg-opacity-25 text-white cursor-pointer font-semibold h-full">
@@ -39,6 +39,16 @@
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
+
+                        <x-jet-dropdown-link href="{{ route('orders.index') }}">
+                            {{ __('My Orders') }}
+                        </x-jet-dropdown-link>
+                        
+                        @role('admin')
+                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                            {{ __('Admin') }}
+                        </x-jet-dropdown-link>
+                        @endrole
 
                         <div class="border-t border-gray-100"></div>
 
@@ -150,7 +160,8 @@
             <ul class="bg-white">
                 @foreach ($categories as $category)
                     <li class="text-neutral-500 hover:bg-orange-500 hover:text-white">
-                        <a href="{{ route('categories.show', $category) }}" class="py-2 px-4 text-sm flex items-center">
+                        <a href="{{ route('categories.show', $category) }}"
+                            class="py-2 px-4 text-sm flex items-center">
                             <span class="flex justify-center w-9">
                                 {!! $category->icon !!}
                             </span>

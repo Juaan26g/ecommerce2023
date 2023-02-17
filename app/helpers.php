@@ -35,7 +35,7 @@ function qty_added($product_id, $color_id = null, $size_id = null)
 function qty_available($product_id, $color_id = null, $size_id = null){
     return quantity($product_id, $color_id, $size_id) - qty_added($product_id, $color_id, $size_id);
 }
-
+//Descuento
 function discount($item){
     $product = Product::find($item->id);
     $qty_available = qty_available($item->id, $item->options->color_id, $item->options->size_id);
@@ -58,6 +58,7 @@ function discount($item){
     }
 }
 
+//Añadido para que las ordenes expiren a los 10 minutos
 function increase($item)
 {
     $product = Product::find($item->id);
