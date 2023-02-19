@@ -74,4 +74,26 @@ class CartTests extends TestCase
              ->assertDontSee($notAddedProduct->name);    
              
      }
+
+     /** @test */
+    
+public function numberOfAddedProductsIsSeenInTheRedCircle() 
+{
+
+    $addedProduct = $this->createProduct();
+    $addedProduct2 = $this->createProduct();
+    
+
+    Livewire::test(AddCartItem::class, ['product' => $addedProduct])
+        ->call('addItem', $addedProduct);
+
+        $this->assertEquals(Cart::count(), 1);
+
+    Livewire::test(AddCartItem::class, ['product' => $addedProduct2])
+        ->call('addItem', $addedProduct2);    
+   
+        $this->assertEquals(Cart::count(), 2);
+
+        
+}
 }
