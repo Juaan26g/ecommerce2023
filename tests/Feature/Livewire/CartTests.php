@@ -96,7 +96,7 @@ class CartTests extends TestCase
 
     /** @test */
 
-    public function numberOfAddedProductsIsLimitedAtStock() 
+    public function numberOfAddedProductsIsLimitedAtStock()
     {
 
         $quantity = 9;
@@ -110,5 +110,18 @@ class CartTests extends TestCase
         }
 
         $this->assertEquals($quantity, Cart::content()->first()->qty);
+    }
+
+    /** @test */
+
+    public function quantityOfProductsIsShown() 
+    {
+        $product = $this->createProduct();
+        $product2 = $this->createProduct(false, false, 12);
+
+        $this->get('products/' . $product->slug)
+            ->assertStatus(200)
+            ->assertDontSeeText('Stock disponible: ' . $product2->quantity)
+            ->assertSeeText('Stock disponible: ' . $product->quantity);
     }
 }
