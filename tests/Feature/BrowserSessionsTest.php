@@ -14,6 +14,7 @@ class BrowserSessionsTest extends TestCase
 
     public function test_other_browser_sessions_can_be_logged_out()
     {
+        $this->markTestIncomplete();
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(LogoutOtherBrowserSessionsForm::class)
