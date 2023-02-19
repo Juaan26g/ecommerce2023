@@ -4,7 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Livewire\{AddCartItem,AddCartItemColor,AddCartItemSize,DropdownCart};
+use App\Http\Livewire\{AddCartItem, AddCartItemColor, AddCartItemSize, DropdownCart};
 use Livewire\Livewire;
 use Tests\TestCase;
 use Tests\CreateData;
@@ -14,7 +14,7 @@ class CartTests extends TestCase
     use CreateData, RefreshDatabase;
     /** @Test */
 
-    public function productsAreAddedToTheCart() 
+    public function productsAreAddedToTheCart()
     {
         $Product = $this->createProduct(false, false);
 
@@ -26,7 +26,7 @@ class CartTests extends TestCase
     }
     /** @test */
 
-    public function colorProductsAreAddedToTheCart() 
+    public function colorProductsAreAddedToTheCart()
     {
         $colorProduct = $this->createProduct(true, false);
 
@@ -38,7 +38,7 @@ class CartTests extends TestCase
     }
     /** @test */
 
-    public function sizeProductsAreAddedToTheCart() 
+    public function sizeProductsAreAddedToTheCart()
     {
         $sizedProduct = $this->createProduct(true, true);
 
@@ -49,51 +49,66 @@ class CartTests extends TestCase
         $this->assertEquals(Cart::content()->first()->name, $sizedProduct->name);
     }
 
-     /** @test */
-    
-     public function addedProductsAreSeenByClickingInTheCart() 
-     {
-         $addedProduct = $this->createProduct(false, false);
-         $addedProduct2 = $this->createProduct(true, false);
-         $addedProduct3 = $this->createProduct(true, true);
-         $notAddedProduct = $this->createProduct(true, true);
- 
-         Livewire::test(AddCartItem::class, ['product' => $addedProduct])
-             ->call('addItem', $addedProduct);
- 
-         Livewire::test(AddCartItem::class, ['product' => $addedProduct2])
-             ->call('addItem', $addedProduct2);    
-             
-         Livewire::test(AddCartItem::class, ['product' => $addedProduct3])
-             ->call('addItem', $addedProduct3);   
-         
-         Livewire::test(DropdownCart::class, ['product' => $addedProduct])
-             ->assertSee($addedProduct->name)
-             ->assertSee($addedProduct2->name)
-             ->assertSee($addedProduct3->name)
-             ->assertDontSee($notAddedProduct->name);    
-             
-     }
+    /** @test */
 
-     /** @test */
-    
-public function numberOfAddedProductsIsSeenInTheRedCircle() 
-{
+    public function addedProductsAreSeenByClickingInTheCart()
+    {
+        $addedProduct = $this->createProduct(false, false);
+        $addedProduct2 = $this->createProduct(true, false);
+        $addedProduct3 = $this->createProduct(true, true);
+        $notAddedProduct = $this->createProduct(true, true);
 
-    $addedProduct = $this->createProduct();
-    $addedProduct2 = $this->createProduct();
-    
+        Livewire::test(AddCartItem::class, ['product' => $addedProduct])
+            ->call('addItem', $addedProduct);
 
-    Livewire::test(AddCartItem::class, ['product' => $addedProduct])
-        ->call('addItem', $addedProduct);
+        Livewire::test(AddCartItem::class, ['product' => $addedProduct2])
+            ->call('addItem', $addedProduct2);
+
+        Livewire::test(AddCartItem::class, ['product' => $addedProduct3])
+            ->call('addItem', $addedProduct3);
+
+        Livewire::test(DropdownCart::class, ['product' => $addedProduct])
+            ->assertSee($addedProduct->name)
+            ->assertSee($addedProduct2->name)
+            ->assertSee($addedProduct3->name)
+            ->assertDontSee($notAddedProduct->name);
+    }
+
+    /** @test */
+
+    public function numberOfAddedProductsIsSeenInTheRedCircle()
+    {
+
+        $addedProduct = $this->createProduct();
+        $addedProduct2 = $this->createProduct();
+
+
+        Livewire::test(AddCartItem::class, ['product' => $addedProduct])
+            ->call('addItem', $addedProduct);
 
         $this->assertEquals(Cart::count(), 1);
 
-    Livewire::test(AddCartItem::class, ['product' => $addedProduct2])
-        ->call('addItem', $addedProduct2);    
-   
-        $this->assertEquals(Cart::count(), 2);
+        Livewire::test(AddCartItem::class, ['product' => $addedProduct2])
+            ->call('addItem', $addedProduct2);
 
-        
-}
+        $this->assertEquals(Cart::count(), 2);
+    }
+
+    /** @test */
+
+    public function numberOfAddedProductsIsLimitedAtStock() 
+    {
+
+        $quantity = 9;
+        $product = $this->createProduct(false, false, $quantity);
+        $this->get('products/' . $product->slug);
+
+        for ($i = 0; $i < 9; $i++) {
+            Livewire::test(AddCartItem::class, ['product' => $product])
+                ->call('addItem', $product);
+            $product->quantity = qty_available($product->id);
+        }
+
+        $this->assertEquals($quantity, Cart::content()->first()->qty);
+    }
 }
