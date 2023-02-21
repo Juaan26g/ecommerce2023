@@ -115,7 +115,7 @@ class CartViewTest extends TestCase
 
     /** @test */
 
-    public function itCanDeleteAProduct()
+    public function itCanDeleteAProductFromTheCart()
     {
         $product = $this->createProduct();
         $product2 = $this->createProduct();
