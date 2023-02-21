@@ -17,7 +17,7 @@ class CreateOrdersTest extends DuskTestCase
     use DatabaseMigrations ,CreateData;
 
    /** @test */
-   public function shippingFormIsSeenWhenChosen() //12s3
+   public function shippingFormIsSeenWhenChosen() 
    {
 
     $this->browse(function (Browser $browser) {
@@ -36,7 +36,7 @@ class CreateOrdersTest extends DuskTestCase
    }
 
    /** @test */
-   public function shippingFormIsNotSeenWhenUnchosen() //12s3
+   public function shippingFormIsNotSeenWhenUnchosen() 
    {
 
     $this->browse(function (Browser $browser) {
@@ -103,11 +103,11 @@ class CreateOrdersTest extends DuskTestCase
         });
         
     }
-    //////////////////////////////
+    
 
     /** @test */
     
-    public function test_districts_select_contains_correct_districts()//14s3//////////////////////////////
+    public function districtsSelectContainsCorrectDistricts()
     {
         $this->browse(function (Browser $browser) {
             $product = $this->createProduct();

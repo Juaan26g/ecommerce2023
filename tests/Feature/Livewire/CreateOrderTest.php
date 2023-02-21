@@ -30,7 +30,7 @@ class CreateOrderTest extends TestCase
 
     /** @test */
     
-    public function a_not_authenticated_user_cannot_create_an_order()
+    public function aNotAuthenticatedUserCannotCreateAnOrder()
     {
         $this->get('/orders/create')
             ->assertRedirect('/login');
@@ -40,7 +40,7 @@ class CreateOrderTest extends TestCase
 
     /** @test */
     
-    public function an_authenticated_user_can_create_an_order()
+    public function anAuthenticatedUserCanCreateAnOrder()
     {
         $product = $this->createProduct();
 
@@ -55,7 +55,7 @@ class CreateOrderTest extends TestCase
 
     /** @test */
 
-    public function shopping_cart_is_saved_in_database_when_a_user_logs_out()
+    public function shoppingCartIsSavedInDatabaseWhenAUserLogsOut()
     {
         $this->actingAs(User::factory()->create());
 
@@ -74,7 +74,7 @@ class CreateOrderTest extends TestCase
 
     /** @test */
 
-    public function shopping_cart_returns_when_a_user_logs_in() 
+    public function shoppingCartReturnsWhenAUserLogsIn() 
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -99,7 +99,7 @@ class CreateOrderTest extends TestCase
 
     /** @test */
     
-    public function test_it_deletes_the_shopping_cart_when_the_order_is_created_and_redirects()
+    public function itDeletesTheShoppingCartWhenTheOrderIsCreatedAndRedirects()
     {
         $this->actingAs(User::factory()->create());
 
