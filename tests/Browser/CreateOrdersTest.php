@@ -1,8 +1,10 @@
 <?php
 namespace Tests\Browser;
+use App\Models\Category;
 use Livewire\Livewire;
 use App\Models\User;
 use App\Http\Livewire\AddCartItem;
+use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -141,6 +143,23 @@ class CreateOrdersTest extends DuskTestCase
 
         });
     }
+ /** @test */
+ public function itDisplaysOrdersSectionInTheNavbarDropdown() 
+ {
 
+     User::factory()->create();
+     $categories = Category::factory(2)->create();
+
+     $this->browse(function (Browser $browser) {
+         $browser->loginAs(User::find(1))
+             ->visit('/')
+             ->click('@loggedUserIcon')
+             ->pause(500)
+             ->click('@orders')
+             ->pause(500)
+             ->assertSee('PENDIENTE' , 'RECIBIDO', 'ENVIADO' , 'ENTREGADO' , 'ANULADO');
+
+     });
+    }
     
 }
