@@ -23,10 +23,11 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CreateOrderTest extends TestCase
 {
-    use RefreshDatabase, CreateData     ;
+    use  CreateData, DatabaseTransactions;
 
     /** @test */
     
@@ -97,10 +98,12 @@ class CreateOrderTest extends TestCase
 
     }
 
+    //DEBERÍA DE SER ORDEN 1 PERO NO SE BORRA LA ORDEN DEL TEST DE ADMIN REQUIRES AUTHENTICATION  ASÍ QUE SI EJECUTAS SOLO ESTA CLASE LOS TESTS VAN BIEN PERO SI SE EJECUTAN TODOS NO
     /** @test */
     
     public function itDeletesTheShoppingCartWhenTheOrderIsCreatedAndRedirects()
     {
+        
         $this->actingAs(User::factory()->create());
 
         $product = $this->createProduct();
@@ -110,8 +113,8 @@ class CreateOrderTest extends TestCase
         $this->assertTrue(count(Cart::content()) != 0);
 
         Livewire::test(CreateOrder::class)
-            ->set('contact', 'contacto')
-            ->set('phone', '611111111')
+            ->set('contact', 'contact')
+            ->set('phone', '612345111')
             ->call('create_order')
             ->assertRedirect('/orders/1/payment');
 

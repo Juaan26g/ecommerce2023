@@ -22,24 +22,10 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders', 'ordersByStatus'));
     }
 
-    public function update()
-    {
-        $this->order->status = $this->status;
-        $this->order->save();
-    }
-
-    public function mount()
-    {
-        $this->status = $this->order->status;
-    }
+   
     public function show(Order $order)
     {
-        return view('admin.orders.show');
+        return view('admin.orders.show', compact('order'));
     }
 
-    public function render()
-    {
-        $items = json_decode($this->order->content);
-        return view('livewire.admin.status-order', compact('items'));
-    }
 }

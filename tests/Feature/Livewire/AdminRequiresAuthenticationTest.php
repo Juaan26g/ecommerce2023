@@ -49,8 +49,8 @@ class AdminRequiresAuthenticationTest extends TestCase
 
 
         Livewire::test(CreateOrder::class)
-            ->set('contact', 'contacto')
-            ->set('phone', '612111111')
+            ->set('contact', 'contact')
+            ->set('phone', '61452111')
             ->call('create_order');
 
         $this->actingAs(User::factory()->create(['id' => 4]))->get('/orders/1/payment')->assertStatus(403);
