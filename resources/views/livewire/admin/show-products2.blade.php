@@ -1,4 +1,4 @@
-//duplicación de la vista de productos show products a show-products2
+
 <div>
     <x-slot name="header">
         <div class="flex items-center">
@@ -16,6 +16,16 @@
             <x-jet-input dusk="adminsearch" class="w-full" wire:model="search" type="text"
                 placeholder="Introduzca el nombre del producto a buscar" />
         </div>
+
+        <select wire:model="pagination" class="rounded-lg">
+            <option value="" selected disabled>Productos a mostrar</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
 
         @if ($products->count())
             <table class="min-w-full divide-y divide-gray-200">
@@ -93,4 +103,3 @@
         @endif
     </x-table-responsive>
 </div>
-///////

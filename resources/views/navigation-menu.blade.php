@@ -18,11 +18,11 @@
                     </x-jet-nav-link>
                     
                 </div>
-                //creamos en el menú el botón que nos lleva a la vista de show-products2
+                
                 <x-jet-nav-link href="{{ route('admin.index2') }}" :active="request()->routeIs('admin.index2')">
                     Productos2
                 </x-jet-nav-link>
-                //
+         
                 <x-jet-nav-link href="{{ route('admin.categories.index') }}" :active="request()->routeIs('admin.categories.*')">
                     Categorías
                 </x-jet-nav-link>
