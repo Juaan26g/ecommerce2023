@@ -1,3 +1,4 @@
+//duplicación de la vista de productos show products a show-products2
 <div>
     <x-slot name="header">
         <div class="flex items-center">
@@ -92,3 +93,4 @@
         @endif
     </x-table-responsive>
 </div>
+///////

@@ -1,5 +1,6 @@
 <?php
 
+// Creacion de la clase SHow products dos (Ejercicio1)
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
@@ -21,3 +22,4 @@ class ShowProducts2 extends Component
         return view('livewire.admin.show-products2', compact('products'))->layout('layouts.admin');
     }
 }
+//
