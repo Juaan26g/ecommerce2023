@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Order;
 use Livewire\Component;
@@ -21,6 +22,20 @@ class PaymentOrder extends Component
         $this->order->save();
         return redirect()->route('orders.show', $this->order);
     }
+    
+    public function productSold()
+    {
+        $items = json_decode($this->order->content);
+
+
+        foreach ($items as $item) {
+            $product = Product::find($item->id);
+            $product->sold = $item->qty + $product->sold;
+            $product->save();
+        }
+        return $product->sold;
+    }
+
     public function render()
     {
         $this->authorize('view', $this->order);

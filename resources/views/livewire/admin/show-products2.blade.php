@@ -47,6 +47,22 @@
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Precio
                         </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Marca
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            n vendidos
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            stock
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            fecha de creación
+                        </th>
                         <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Editar</span>
                         </th>
@@ -72,7 +88,9 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $product->subcategory->category->name }}
                                 </div>
+                                <!-- Añadido para que se vea la subcategoría -->
                                 <div class="text-sm text-gray-500">{{ $product->subcategory->name }}</div>
+                                <!-- Añadido para que se vea la subcategoría -->
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
@@ -82,6 +100,18 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $product->price }} &euro;
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $product->brand->name}}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $product->sold}}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $product->stock}}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $product->created_at}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('admin.products.edit', $product) }}"
