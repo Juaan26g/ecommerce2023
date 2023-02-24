@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\{ShowProducts, EditProduct, CreateProduct, ShowCategory, BrandComponent, DepartmentComponent, ShowDepartment, ShowCity , UserComponent};
+use App\Http\Livewire\Admin\{ShowProducts, EditProduct, CreateProduct, ShowCategory, BrandComponent, DepartmentComponent, ShowDepartment, ShowCity , UserComponent, ShowProducts2};
 use App\Http\Controllers\Admin\{ProductController, CategoryController,OrderController};
 
 Route::get('/', ShowProducts::class)->name('admin.index');
+Route::get('/dos', ShowProducts2::class)->name('admin.index2');
 Route::get('products/{product}/edit', EditProduct::class)->name('admin.products.edit');
 Route::get('products/create', CreateProduct::class)->name('admin.products.create');
 Route::post('product/{product}/files', [ProductController::class, 'files'])->name('admin.products.files');
