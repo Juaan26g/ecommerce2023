@@ -1,4 +1,3 @@
-<div>
     <x-slot name="header">
         <div class="flex items-center">
             <h2 class="font-semibold text-xl text-gray-600 leading-right">
@@ -25,54 +24,76 @@
             <option value="100">100</option>
         </select>
 
-        
-            
-            <select wire:model="shownColumns" class="rounded-lg">
-                <option value="" selected disabled>Columnas a mostrar</option>
-                @foreach ($columns as $column)
-                    <option value="{{ $column }}">{{ $column }}</option>
-                @endforeach
-            </select>
-        
 
 
-</div>
+        <div @click.away="dropdownColumns = false" x-data="{ dropdownColumns: false }" class="relative inline-block">
+            <x-button color="orange" @click="dropdownColumns = !dropdownColumns">
+                <i class="fa-solid fa-table-columns"></i>
+                <span class="ml-1">Columnas</span>
+            </x-button> 
+            <div x-show="dropdownColumns" class="absolute left-0 w-40 mt-2 bg-gray-100 rounded-md shadow-xl">
+                <span href="#" class="block px-4 py-2 text-sm">
+                    @foreach ($columns as $column)
+                        <input type="checkbox" wire:model="shownColumns" value="{{ $column }}">
+                        <label>{{ $column }}</label>
+                        <br />
+                    @endforeach
+                </span>
+            </div>
+        </div>
+
 @if ($products->count())
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
+                @if ($this->Column('Nombre'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nombre
                 </th>
+                @endif
+                @if ($this->Column('Categoria'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Categoría
                 </th>
+                @endif
+                @if ($this->Column('Estado'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Estado
                 </th>
+                @endif
+                @if ($this->Column('Precio'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Precio
                 </th>
+                @endif
+                @if ($this->Column('Marca'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Marca
                 </th>
+                @endif
+                @if ($this->Column('NVendidos'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     n vendidos
                 </th>
+                @endif
+                @if ($this->Column('Stock'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     stock
                 </th>
+                @endif
+                @if ($this->Column('Fecha de creacion'))
                 <th scope="col"
                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     fecha de creación
                 </th>
+                @endif
                 <th scope="col" class="relative px-6 py-3">
                     <span class="sr-only">Editar</span>
                 </th>
