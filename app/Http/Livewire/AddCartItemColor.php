@@ -13,7 +13,7 @@ class AddCartItemColor extends Component
     public $qty = 1;
     public $quantity = 0;
     public $color_id = '';
-    public $options = ['size_id' => null,];
+    public $options = ['size_id' => null,'sold => 0'];
 
 
 

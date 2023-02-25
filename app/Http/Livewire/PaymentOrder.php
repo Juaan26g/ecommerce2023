@@ -19,6 +19,7 @@ class PaymentOrder extends Component
     public function payOrder()
     {
         $this->order->status = 2;
+        $this->productSold();
         $this->order->save();
         return redirect()->route('orders.show', $this->order);
     }
