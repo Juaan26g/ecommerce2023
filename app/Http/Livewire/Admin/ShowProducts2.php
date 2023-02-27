@@ -69,6 +69,9 @@ class ShowProducts2 extends Component
         if ($this->price) {
             $products = $products->where('price', 'LIKE', "%{$this->price}%");
         }
+        if ($this->order && $this->direction) {
+            $products = $products->orderBy($this->order, $this->direction);
+        }
         
 
 
