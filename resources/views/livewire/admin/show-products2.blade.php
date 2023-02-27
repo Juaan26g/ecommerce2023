@@ -42,6 +42,33 @@
             </div>
         </div>
 
+        <div @click.away="dropdownMenu = false"x-data="{ dropdownMenu: false }" class="inline-block">
+            <x-button color="orange" @click="dropdownMenu = ! dropdownMenu"
+                class="ml-2 flex items-center p-2 bg-white bg-gray-100 rounded-md">
+                <i class="fa-solid fa-filter"></i>
+                <span class="ml-4">Mostrar Filtros </span>
+            </x-button>
+            <div x-show="dropdownMenu" class="absolute left-1 py-2 mt-2 bg-white bg-gray-100 rounded-md shadow-xl">
+                <aside>
+                    <x-jet-input class="w1/3" wire:model="category" type="text" placeholder="Categoria a buscar" />
+
+
+
+                   <!-- <x-jet-input type="date" wire:model="from" class="border border-gray-400 rounded-lg"
+                        id="from" placeholder='DD/MM/YYYY'></x-jet-input>
+                   -->
+                    <x-jet-input class="w1/3" wire:model="brand" type="text" placeholder="Marca" />
+
+
+                    <x-jet-input class="w1/3" wire:model="price" type="text" placeholder="Precio" />
+
+                    <x-jet-button class="mt-4" wire:click="resetFilter">
+                        Eliminar Filtros
+                    </x-jet-button>
+                </aside>
+            </div>
+        </div>
+
         @if ($products->count())
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">

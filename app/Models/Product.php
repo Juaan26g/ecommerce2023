@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon as SupportCarbon;
 
 class Product extends Model
 {
@@ -42,6 +44,33 @@ class Product extends Model
         return 'slug';
     }
 
+
+    public static function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', "%{$search}%");
+    }
+
+    public static function scopeCategoryFilter($query, $category)
+    {
+        return $query->whereHas('subcategory', function (Builder $query) use ($category) {
+            $query->whereHas('category', function (Builder $query) use ($category) {
+                $query->where('name', 'LIKE', "%{$category}%");
+            });
+        });
+    }
+
+    public static function scopeBrandFilter($query, $brand)
+    {
+        return $query->whereHas('brand', function (Builder $query) use ($brand) {
+            $query->where('name', 'LIKE', "%{$brand}%");
+        });
+    }
+
+  /*  public static function scopeFromFilter($query, $date){
+        $date = Carbon::createFromFormat('m-d-Y', $date);
+
+        $query->whereDate('created_at', '<=', $date);
+    } */
     public function getStockAttribute()
     {
         if ($this->subcategory->size) {

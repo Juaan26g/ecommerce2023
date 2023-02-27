@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
 use Livewire\{Component, WithPagination};
+use Illuminate\Database\Query\Builder;
 
 class ShowProducts2 extends Component
 {
@@ -12,7 +13,8 @@ class ShowProducts2 extends Component
 
     public $columns = ['Nombre','Categoria','Estado','Precio','Marca','NVendidos','Stock','Fecha de creacion'];
     public $shownColumns = [];
-    public $search;
+    public $search, $category, $price, $brand;
+    public $reset;
     public $pagination = 10;
     public $order = null;
     public $direction = null;
@@ -51,14 +53,24 @@ class ShowProducts2 extends Component
     {
         $this->shownColumns = $this->columns;
     }
+    public function resetFilter()
+    {
+        $this->reset(['search', 'category', 'price', 'brand','reset']);
+        $this->resetPage();
+    }
     public function render()
     {
-        $products = Product::query()->where('name', 'LIKE', "%{$this->search}%");
-
-
-        if ($this->order && $this->direction) {
-            $products = $products->orderBy($this->order, $this->direction);
+        $products = Product::query()->search($this->search)
+        ->categoryFilter($this->category)
+        ->brandFilter($this->brand);
+        
+        
+        
+        if ($this->price) {
+            $products = $products->where('price', 'LIKE', "%{$this->price}%");
         }
+        
+
 
         $products = $products->paginate($this->pagination);
 
